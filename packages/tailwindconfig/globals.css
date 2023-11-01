@@ -53,7 +53,11 @@
   * {
     @apply border-border;
   }
+  html {
+    height: -webkit-fill-available;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-h-[100vh];
+    min-height: -webkit-fill-available;
   }
 }

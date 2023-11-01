@@ -14,9 +14,11 @@ model User {
   id        Int       @id @default(autoincrement())
   email     String    @unique
   username  String
-  shortLink String?
+  shortLink String?   @unique
   Posts     Post[]
   Comment   Comment[]
+
+  passwordHash String
 }
 
 model Post {
