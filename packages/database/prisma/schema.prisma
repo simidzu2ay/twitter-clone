@@ -11,8 +11,34 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
   username  String
   shortLink String?
+  Posts     Post[]
+  Comment   Comment[]
+}
+
+model Post {
+  id      Int    @id @default(autoincrement())
+  content String
+  author  User   @relation(fields: [userId], references: [id])
+
+  userId  Int
+  Comment Comment[]
+}
+
+model Comment {
+  id      Int    @id @default(autoincrement())
+  content String
+  author  User   @relation(fields: [userId], references: [id])
+  post    Post   @relation(fields: [postId], references: [id])
+
+  replyOn Comment? @relation("ReplyComment", fields: [replyId], references: [id])
+  replyId Int?
+
+  userId Int
+  postId Int
+
+  replies Comment[] @relation("ReplyComment")
 }
